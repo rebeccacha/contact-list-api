@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="Rebecca Chandler">
+<meta name="description" content="Contact List Service">
+<title>Contact List Service</title>
+<style>
+body {
+	margin: 0px;
+}
+#header {
+	background-color: #6495ED;
+	padding: 1px;
+	width: 100%;
+}
+#body {
+	margin: 10px 20px;
+}
+#header h1 {
+	margin: 20px;
+}
+#body div {
+	margin: 10px 10px;
+}
+#api-link {
+	font-size:150%;
+}
+</style>
+</head>
+<body>
+</head>
+<body>
+<div id="header">
+	<h1>Contact List Service</h1>
+</div>
+
+<div id="body">
+	<div id="api-link">
+		<a id="rest-address" href="/contactlist/rest">Contact REST API</a>
+	</div>
+	
+	<script>
+	document.getElementById("rest-address").href = window.location.href + "rest/";
+	</script>
+	
+	<h3>About</h3>
+	
+	<div>
+		Tested using <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en">Postman</a>,
+		a Google Chrome extension for API testing.
+	</div>
+	
+	<div>
+		<b>Author</b><br/>
+		Rebecca Chandler
+	</div>
+</div>
+</body>
+</html>

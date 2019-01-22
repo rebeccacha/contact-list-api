@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="author" content="Rebecca Chandler">
+<meta name="description" content="About ContactList">
+<title>About ContactList</title>
+</head>
+<body padding="20%">
+<h1>Contact List Home</h1>
+<h3>REST Resources</h3>
+Resource descriptions: {domain}/ContactList/rest/{path}<br>
+E.g. Retrieve all contacts: GET http://localhost:8080/ContactList/rest/contact/<br>
+<br>
+
+<h3>Project Progress</h3>
+Unit testing not complete.<br>
+Resource paths tested with the Postman Google Chrome extension.<br>
+There were sometimes problems in Postman if the Content-Type HTTP header value was present instead of absent.<br>
+<br>
+The "Create" action uses the POST HTTP method and can be tested with an <a href="./NewContact.html">HTML form</a> with a file-upload field.  The "Update" action uses the PUT method and cannot be created through HTML alone.<br>
+<br>
+Data is assumed to be correctly formatted.<br>
+Parameters should be able to be excluded to create null values in the database.<br>
+The PUT (update) method replaces the entire contact record, not just single fields. <br>
+Poorly formatted input is not well-checked and may cause the application to crash. <br>
+<br>
+Searches are currently case-sensitive.<br>
+</body>
+</html>

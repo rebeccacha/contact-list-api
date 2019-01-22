@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>New Contact</title>
+</head>
+<body>
+<h3>New Contact</h3>
+<p>Sample form for a new contact.  The form's <i>action</i> attribute may need to be updated to the target URL</p>
+<p>
+<form action="../rest/contact" method="post" enctype="multipart/form-data">
+	Name: <input type="text" name="name"><br>
+	Company: <input type="text" name="company"><br>
+	Profile Image: <input type="file" name="file" /><br>
+	Email: <input type="text" name="email"><br>
+	Birthdate: <input type="date" name="birthdate"><br>
+	Phone (work): <input type="text" name="workPhone"><br>
+	Phone (personal): <input type="text" name="personalPhone"><br>
+	
+	<br>
+	
+	<fieldset>
+		<legend>Address:</legend>
+		Line1: <input type="text" name="line1"><br>
+		Line2: <input type="text" name="line2"><br>
+		City: <input type="text" name="city">
+		State: <input type="text" name="state">
+		Zip: <input type="text" name="zip"><br>
+		Country: <input type="text" name="country"><br>
+	</fieldset>
+	
+	<br>
+	
+   <input type="submit"  />
+</form>
+</p>
+</body>
+</html>

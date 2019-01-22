@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="Rebecca Chandler">
+<meta name="description" content="About ContactList">
+<title>Contact REST Service</title>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+.cmd {
+	margin-bottom: 10px;
+	width: 100%;
+}
+.cmd td, .cmd th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.cmd tr td:first-child {
+	width: 100px;
+}
+.cmd th {
+	background-color: #6495ED;
+	font-size: 110%;
+}
+
+.cmd table th {
+	background-color: transparent;
+}
+.params {
+	font-size:90%;
+}
+.params th, .params td {
+	padding: 0.5px;
+	padding-left: 8px;
+	padding-right: 8px;
+	text-align: left;
+	border: none;
+	font-size: 90%;
+	font-weight: default;
+	/* border-left: 1px solid #dddddd; */
+}
+.params th {
+	text-align: left;
+	font-weight: normal;
+}
+.params td {
+	color: #555;
+	border-top: 1px solid #eee;
+}
+.params td:first-child {
+	/* font-weight: bold; */
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 170px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /* background-color: #111; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 4px solid lightgrey;
+}
+
+.sidenav a {
+	display: block;
+	text-decoration: none;
+	font-family: arial, sans-serif;
+}
+
+.sidenav a:hover {
+    background-color: #ddd;
+}
+
+.sidenav .header 
+{
+	font-size: 120%;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+	padding: 7px;
+	background-color: #eee;
+}
+
+.sidenav .contents {
+	 padding: 7px;
+}
+
+
+.main {
+    margin-left: 170px; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+    font-family: arial, sans-serif;
+    font-size: 13px;
+}
+
+.main table {
+	font-size: 15px;
+}
+
+.header .understate {
+	color: #999;
+	font-weight: bold;
+}
+
+.json {
+	font-family: courier, monospace;
+	background-color: #f9f9f9;
+	margin: 10px 15px;
+}
+</style>
+</head>
+<body>
+</head>
+<body>
+<div class="sidenav">
+<div class="header">
+	<span class="understate">REST Service API </span>
+	Contact Actions
+</div>
+<div class="contents">
+<a href="#Create">Create</a>
+<a href="#Read">Read</a>
+<a href="#ReadImg">Read Profile Image</a>
+<a href="#Update">Update</a>
+<a href="#Delete">Delete</a>
+<a href="#List">List All</a>
+<a href="#Search">Search All</a>
+</div>
+</div>
+<div class="main">
+<!-- <h2>Contact REST Service API</h2> -->
+<div>
+	Base URL: <span id="baseurl"></span>
+</div>
+<br/>
+<script>
+document.getElementById("baseurl").innerHTML = window.location.href;
+</script>
+<div>
+	<table class="cmd" id="Create">
+		<tr>
+	    <th colspan="3">Create a Contact</th>
+	  </tr>
+	  <tr>
+	    <td>POST</td>
+	    <td>/contact/</td>
+	    <td>Content-Type: multipart/form-data</td>
+	  </tr>
+	  <tr>
+	    <td colspan="3">
+			<table class="params">
+				<tr>
+			    <th>Parameter</th>
+			    <th>Format</th>
+			    <th>Description</th>
+			  </tr>
+			  <tr>
+			    <td>name</td>
+			    <td>string</td>
+			    <td>contact's name</td>
+			  </tr>
+			  <tr>
+			    <td>company</td>
+			    <td>string</td>
+			    <td>contact's company</td>
+			  </tr>
+			  <tr>
+			    <td>email</td>
+			    <td>string</td>
+			    <td>contact's email</td>
+			  </tr>
+			  <tr>
+			    <td>birthdate</td>
+			    <td>string, format: yyyy-mm-dd</td>
+			    <td>contact's birthdate</td>
+			  </tr>
+			  <tr>
+			    <td>workPhone</td>
+			    <td>string</td>
+			    <td>contact's workPhone</td>
+			  </tr>
+			  <tr>
+			    <td>personalPhone</td>
+			    <td>string</td>
+			    <td>contact's personalPhone</td>
+			  </tr>
+			  <tr>
+			    <td>file</td>
+			    <td>type: byte stream, size: &lt;65kB</td>
+			    <td>contact's profile image file</td>
+			  </tr>
+			  <tr>
+			    <td>line1</td>
+			    <td>string</td>
+			    <td>line1 of contact's address </td>
+			  </tr>
+			  <tr>
+			    <td>line2</td>
+			    <td>string</td>
+			    <td>line2 of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>city</td>
+			    <td>string</td>
+			    <td>city of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>state</td>
+			    <td>string</td>
+			    <td>state of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>zip</td>
+			    <td>string</td>
+			    <td>zipcode of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>country</td>
+			    <td>string</td>
+			    <td>country of conact's address</td>
+			  </tr>
+			</table>
+	    </td>
+	  </tr>
+	</table>
+	
+	<p>
+		<b>Returns:</b><br>
+		A JSON containing the submitted data.  <a href="#jsonSample">JSON sample</a>.<br/>
+		The <i>id</i> field of the returned JSON will be invalid (-1).<br>
+		<br>
+		<b>Notes:</b><br>
+		Fields may be left blank/null.<br/>
+		Files >65 Kb are ignored.  There is no file-type check.<br>
+		<i>Birthdate</i> is the only format-checked string entry.
+	</p>
+	<br><br>
+</div>
+
+
+
+
+
+<div>
+	<table class="cmd" id="Read">
+		<tr>
+	    <th colspan="3">Read a Contact</th>
+	  </tr>
+	  <tr>
+	    <td>GET</td>
+	    <td>/contact/{id}</td>
+	    <td>Content-Type: </td>
+	  </tr>
+	</table>
+
+	<div>
+		<b>Returns:</b><br/>
+		If the <i>id</i> is found: A JSON filled with this data.
+		<div id="jsonSample">
+			Sample JSON:<br/>
+			<div class="json">
+				{<br>
+				&emsp;"id":1,<br>
+				&emsp;"name":"Jane Doe",<br>
+				&emsp;"company":"ABC Company",<br>
+				&emsp;"email":"janedoe@domain.com",<br>
+				&emsp;"birthdate":"1990-01-30",<br>
+				&emsp;"workPhone":"(123)456-7890",<br>
+				&emsp;"personalPhone":"(908)765-4321",<br>
+				&emsp;"address":{<br>
+				&emsp;&emsp;"id":1,<br>
+				&emsp;&emsp;"line1":"123 Apple St",<br>
+				&emsp;&emsp;"line2":"Apt #2",<br>
+				&emsp;&emsp;"line3":"",<br>
+				&emsp;&emsp;"city":"Milwaukee",<br>
+				&emsp;&emsp;"state":"WI",<br>
+				&emsp;&emsp;"zip":"53202",<br>
+				&emsp;&emsp;"country":"United States"<br>
+				&emsp;}<br>
+				}<br>
+			</div>
+		</div>
+		Retrieve the profile image with a separate <a href="#getImg">GET image method</a>.<br/>
+		<br/>
+		
+		If <i>id</i> is not found: 404 error.<br>
+		<br>
+		<b>Notes:</b><br>
+		Use the top-level id found in the JSON format (and not the address id) to identify a contact.<br>
+	</div>
+<br><br>
+</div>
+
+
+
+
+
+
+<div id="getImg">
+	<table class="cmd" id="ReadImg">
+		<tr>
+	    <th colspan="3">Read a Contact's Profile Image</th>
+	  </tr>
+	  <tr>
+	    <td>GET</td>
+	    <td>/contact/{id}/profile_img</td>
+	    <td>Content-Type: </td>
+	  </tr>
+	</table>
+	
+	<p id="jsonSample"><b>Returns:</b><br>
+	A (presumably) image file, if one has been uploaded.<br>
+	Content-type: image/jpg<br>
+	<br>
+	404 Not Found Error if no image has been uploaded<br>
+	<br>
+	<b>Notes:</b><br>
+	The returned file is not assured to be an image or a JPG.  There is no file-type check.<br>
+	</p>
+	<br><br>
+</div>
+
+
+
+
+
+
+
+
+<div>
+	<table class="cmd" id="Update">
+		<tr>
+	    <th colspan="3">Update a Contact</th>
+	  </tr>
+	  <tr>
+	    <td>PUT</td>
+	    <td>/contact/{id}</td>
+	    <td>Content-Type: multipart/form-data</td>
+	  </tr>
+	  <tr>
+		  <td colspan="3">
+			  <table class="params">
+				<tr>
+			    <th>Parameter</th>
+			    <th>Format</th>
+			    <th>Description</th>
+			  </tr>
+			  <tr>
+			    <td>name</td>
+			    <td>string</td>
+			    <td>contact's name</td>
+			  </tr>
+			  <tr>
+			    <td>company</td>
+			    <td>string</td>
+			    <td>contact's company</td>
+			  </tr>
+			  <tr>
+			    <td>email</td>
+			    <td>string</td>
+			    <td>contact's email</td>
+			  </tr>
+			  <tr>
+			    <td>birthdate</td>
+			    <td>string, format: yyyy-mm-dd</td>
+			    <td>contact's birthdate</td>
+			  </tr>
+			  <tr>
+			    <td>workPhone</td>
+			    <td>string</td>
+			    <td>contact's workPhone</td>
+			  </tr>
+			  <tr>
+			    <td>personalPhone</td>
+			    <td>string</td>
+			    <td>contact's personalPhone</td>
+			  </tr>
+			  <tr>
+			    <td>file</td>
+			    <td>type: byte stream, size: &lt;65kB</td>
+			    <td>contact's profile image file</td>
+			  </tr>
+			  <tr>
+			    <td>line1</td>
+			    <td>string</td>
+			    <td>line1 of contact's address </td>
+			  </tr>
+			  <tr>
+			    <td>line2</td>
+			    <td>string</td>
+			    <td>line2 of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>city</td>
+			    <td>string</td>
+			    <td>city of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>state</td>
+			    <td>string</td>
+			    <td>state of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>zip</td>
+			    <td>string</td>
+			    <td>zipcode of contact's address</td>
+			  </tr>
+			  <tr>
+			    <td>country</td>
+			    <td>string</td>
+			    <td>country of conact's address</td>
+			  </tr>
+			</table>
+		  </td>
+		</tr>
+	</table>
+	
+	
+		<p>
+			<b>Returns:</b><br>
+			A JSON containing the submitted data.  <a href="#jsonSample">JSON sample</a>.<br/>
+			The <i>id</i> field of the returned JSON will be invalid (-1).<br>
+			<br>
+			<b>Notes:</b><br>
+			Fields may be left blank/null.  These will be overwritten with a null value.<br/>
+			Files >65 Kb are ignored.  There is no file-type check.<br>
+			<i>Birthdate</i> is the only format-checked string entry.
+		</p>
+	<br><br>
+</div>
+	
+	
+	
+	
+<div>
+	<table class="cmd" id="Delete">
+		<tr>
+	    <th colspan="3">Delete a Contact</th>
+	  </tr>
+	  <tr>
+	    <td>DELETE</td>
+	    <td>/contact/{id}</td>
+	    <td>Content-Type: </td>
+	  </tr>
+	</table>
+	
+	<p><b>Returns:</b><br>
+	{id} on success.<br>
+	-1 on failure to update<br>
+	Content-Type: text/plain<br>
+	<br>
+	<b>Notes:</b><br>
+	-<br>
+	</p>
+	<br><br>
+</div>
+
+
+
+
+
+
+
+<div>
+	<table class="cmd" id="List">
+		<tr>
+	    <th colspan="3">List All Contacts</th>
+	  </tr>
+	  <tr>
+	    <td>GET</td>
+	    <td>/contact/</td>
+	    <td>Content-Type: </td>
+	  </tr>
+	</table>
+	
+	<div id="jsonArraySample">
+		<b>Returns:</b><br>
+		JSON array of all contacts.<br>
+		Sample JSON:<br>
+		<div class="json">
+			[<br>
+			&emsp;{<br>
+			&emsp;&emsp;"id": 1,<br>
+			&emsp;&emsp;"name": "Jane Doe",<br>
+			&emsp;&emsp;"company": "ABC Company",<br>
+			&emsp;&emsp;"email": "janedoe@domain.com",<br>
+			&emsp;&emsp;"birthdate": "1990-01-30",<br>
+			&emsp;&emsp;"workPhone": "(123)456-7890",<br>
+			&emsp;&emsp;"personalPhone": "(908)765-4321",<br>
+			&emsp;&emsp;"address": {<br>
+			&emsp;&emsp;&emsp;"id": 1,<br>
+			&emsp;&emsp;&emsp;"line1": "123 Apple St",<br>
+			&emsp;&emsp;&emsp;"line2": "Apt #2",<br>
+			&emsp;&emsp;&emsp;"line3": "",<br>
+			&emsp;&emsp;&emsp;"city": "Milwaukee",<br>
+			&emsp;&emsp;&emsp;"state": "WI",<br>
+			&emsp;&emsp;&emsp;"zip": "53202",<br>
+			&emsp;&emsp;&emsp;"country": "United States"<br>
+			&emsp;&emsp;}<br>
+			&emsp;},<br>
+			&emsp;{<br>
+			&emsp;&emsp;"id": 2,<br>
+			&emsp;&emsp;"name": "Alex Smith",<br>
+			&emsp;&emsp;"company": "XYZ Inc",<br>
+			&emsp;&emsp;"email": "alex-smith@domain.com",<br>
+			&emsp;&emsp;"birthdate": "1977-06-14",<br>
+			&emsp;&emsp;"workPhone": "(123)222-2222",<br>
+			&emsp;&emsp;"personalPhone": "(908)333-3333",<br>
+			&emsp;&emsp;"address": {<br>
+			&emsp;&emsp;&emsp;"id": 2,<br>
+			&emsp;&emsp;&emsp;"line1": "246 Pineapple St",<br>
+			&emsp;&emsp;&emsp;"line2": "Apt #7",<br>
+			&emsp;&emsp;&emsp;"line3": "",<br>
+			&emsp;&emsp;&emsp;"city": "Madison",<br>
+			&emsp;&emsp;&emsp;"state": "WI",<br>
+			&emsp;&emsp;&emsp;"zip": "53558",<br>
+			&emsp;&emsp;&emsp;"country": "United States"<br>
+			&emsp;&emsp;}<br>
+			&emsp;}<br>
+			]<br>
+		</div><br/>
+		Retrieve a contact's profile image with a separate <a href="#getImg">GET image method</a>.<br>
+		<br>
+		<b>Notes:</b><br>
+		When indexing a contact, take care to use the contact's first-level <i>id</i> and not its array index.<br>
+	</div>
+	<br><br>
+</div>
+
+
+
+
+
+
+<div>
+	<table class="cmd" id="Search">
+		<tr>
+	    <th colspan="3">Search Contacts</th>
+	  </tr>
+	  <tr>
+	    <td>GET</td>
+	    <td>/contact/</td>
+	    <td>Content-Type: </td>
+	  </tr>
+	  <tr>
+	  	<td colspan="3">
+	  		<table class="params">
+				<tr>
+			    <th>Parameter</th>
+			    <th>Format</th>
+			    <th>Description</th>
+			  </tr>
+			  <tr>
+			    <td>name</td>
+			    <td>string</td>
+			    <td>all or part of a contact's name</td>
+			  </tr>
+			  <tr>
+			    <td>email</td>
+			    <td>string</td>
+			    <td>all or part of a contact's email</td>
+			  </tr>
+			  <tr>
+			    <td>city</td>
+			    <td>string</td>
+			    <td>a contact's full city name</td>
+			  </tr>
+			  <tr>
+			    <td>state</td>
+			    <td>string</td>
+			    <td>a contact's full state name</td>
+			  </tr>
+			</table>
+	  	</td>
+	  </tr>
+	</table>
+	<p>
+		<b>Returns:</b><br>
+		JSON array of all contacts matching the search criteria.<br>
+		<a href="#jsonArraySample">Sample JSON array of contacts</a>.<br>
+		<br>
+		<b>Notes:</b><br>
+		Email and name parameters may be used together to search for contacts matching both criteria.<br>
+		City and state parameters may be used together to search for contacts matching both criteria.<br>
+	</p>
+	<br><br>
+</div>
+</div>
+</body>
+</html>
